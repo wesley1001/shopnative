@@ -1,8 +1,5 @@
 /**
  * This is the entry point for your experience that you will run on Exponent.
- *
- * Start by looking at the render() method of the component called
- * FirstExperience. This is where the text and example components are.
  */
 'use strict';
 
@@ -24,14 +21,14 @@ let {
 } = React;
 
 
-// // let Login = require('./login');
-// // let Home = require('./home/index');
-// // let Market = require('./market/index');
-// // let ShoppingCart = require('./shoppingcart');
-// // let Me = require('./me');
-// // let Search = require('./search/search');
-// // let Scan = require('./search/search');
-// // StatusBarIOS.setStyle('light-content');
+// let Login = require('./login');
+// let Home = require('./home/index');
+// let Market = require('./market/index');
+// let ShoppingCart = require('./shoppingcart');
+// let Me = require('./me');
+// let Search = require('./search/search');
+// let Scan = require('./search/search');
+// StatusBarIOS.setStyle('light-content');
 
 const UI_COLOR = "rgb(232, 81, 81)";
 // let ExHome = require('./ExHome');
@@ -146,11 +143,11 @@ class MainScreen extends React.Component {
   }
 
   render() {
-    // if(this.state.selectedTab ==='search'){
-    //   return this._renderNewTab(Search,'Search');
-    // }else if(this.state.selectedTab ==='scan'){
-    //   return this._renderNewTab(Scan,'Scan');
-    // }
+    if(this.state.selectedTab ==='search'){
+      return this._renderNewTab(Search,'Search');
+    }else if(this.state.selectedTab ==='scan'){
+      return this._renderNewTab(Scan,'Scan');
+    }
 
     return (
       <TabBarIOS >
@@ -177,25 +174,6 @@ class MainScreen extends React.Component {
     var Component = route.component;
     return (
       <Component {...route.props} navigator={navigator} route={route} />
-    );
-  }
-
-  renderXXX() {
-    return (
-      <Navigator
-        initialRoute={{
-          component: HomeScreen,
-          title: 'Demo'
-        }}
-        renderScene={this._renderScene}
-        navigationBar={
-          <Navigator.NavigationBar
-            routeMapper={RouteMapper}
-            navigationStyles={Navigator.NavigationBar.StylesIOS}
-            style={styles.navBar}
-          />
-        }
-      />
     );
   }
 }
