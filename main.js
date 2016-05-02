@@ -31,7 +31,6 @@ let {
 // StatusBarIOS.setStyle('light-content');
 
 const UI_COLOR = "rgb(232, 81, 81)";
-// let ExHome = require('./ExHome');
 import ExHome from './ExHome';
 import HomeScreen from './src/index';
 import RouteMapper from './src/utils/route-mapper';

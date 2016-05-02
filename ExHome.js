@@ -13,6 +13,7 @@ let {
   Easing,
   Image,
   ScrollView,
+  StatusBar,
   StatusBarIOS,
   StyleSheet,
   Text,
@@ -25,6 +26,9 @@ let {
 let ExBoxes = require('./ExBoxes');
 let ExPhotoGallery = require('./ExPhotoGallery');
 let ExScreen = require('./ExScreen');
+// import does not work !!!!
+// import { CarouselWrapper } from "./src/scenes/carousel-wrapper";
+let CarouselWrapper = require("./src/scenes/carousel-wrapper");
 
 let HORIZ_SPACE = 12;
 
@@ -45,21 +49,25 @@ class ExHome extends React.Component {
 
     return (
       <ExScreen
-        title="shop"
+        title="Welcome P13N@walmartlabs"
         headerColor={this.state.headerColor}
         scrollEnabled={!this.state.isBoxPressed}
         style={styles.container}>
 
-        {/* Try editing this text and reloading your project in Exponent */}
-        <Text style={styles.paragraph}>
+        {/* Try editing this text and reloading your project in Exponent 
+          <Text style={styles.paragraph}>
           Welcome to P13N@walmartlabs.com
         </Text>
+        */}
 
         {/* Photo gallery demo */}
-        <Text style={styles.sectionTitle}>Photo Gallery</Text>
         <ExPhotoGallery style={styles.gallery} />
 
-        {/* Bouncy boxes demo */}
+        <Text style={styles.sectionTitle}>Trending Items </Text>
+        <CarouselWrapper />
+        
+
+        {/* Bouncy boxes demo 
         <Text style={styles.sectionTitle}>Interactive Components</Text>
         <ExBoxes
           colors={boxColors}
@@ -72,26 +80,16 @@ class ExHome extends React.Component {
           Tap the boxes to change the color of the status bar. Press down
           and drag them to see them bounce back with spring physics.
         </Text>
+        */}
 
-        {/* Publishing instructions */}
-        <Text style={styles.sectionTitle}>Publishing</Text>
-        <Text style={styles.paragraph}>
-          When you are ready to share what your work, run <Text style={styles.code}>exp publish</Text>.
-          Give the link to someone who has the Exponent app and they'll be
-          able to see what you've built.
-        </Text>
-
-        <Text style={styles.attribution}>
-          Made for <Text style={styles.exponent}>EXPONENT</Text>
-        </Text>
       </ExScreen>
     );
   }
 
   componentDidMount() {
     if (StatusBarIOS) {
-      StatusBarIOS.setStyle('light-content', true);
-      StatusBarIOS.setHidden(false, 'fade');
+      StatusBar.setBarStyle('light-content', true);
+      StatusBar.setHidden(false, 'fade');
     }
   }
 
@@ -104,18 +102,19 @@ let styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    height: 12
   },
   sectionTitle: {
     color: '#777',
     fontSize: 22,
     fontWeight: '300',
-    marginTop: 16,
+    marginTop: 4,
     marginHorizontal: HORIZ_SPACE,
   },
   paragraph: {
     color: '#000',
     fontSize: 16,
-    marginTop: 8,
+    marginTop: 4,
     marginHorizontal: HORIZ_SPACE,
   },
   note: {

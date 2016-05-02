@@ -8,7 +8,7 @@ let {
   View,
 } = React;
 
-let BODY_HEIGHT = 44;
+let BODY_HEIGHT = 24;
 let TITLE_MARGIN_TOP = 12;
 let STATUS_BAR_HEIGHT = 20;
 
