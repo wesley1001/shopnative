@@ -10,7 +10,7 @@ let {
 
 let ExHeader = require('./ExHeader');
 
-const STATUS_BAR_HEIGHT = 20;
+const STATUS_BAR_HEIGHT = 0;
 
 class ExScreen extends React.Component {
   constructor(props, context) {

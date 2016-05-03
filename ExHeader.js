@@ -8,9 +8,9 @@ let {
   View,
 } = React;
 
-let BODY_HEIGHT = 24;
-let TITLE_MARGIN_TOP = 12;
-let STATUS_BAR_HEIGHT = 20;
+let BODY_HEIGHT = 34;
+let TITLE_MARGIN_TOP = 6;
+let STATUS_BAR_HEIGHT = 0;
 
 class ExHeader extends React.Component {
   render() {
@@ -69,7 +69,7 @@ let styles = StyleSheet.create({
     overflow: 'hidden',
   },
   statusBarStrut: {
-    height: STATUS_BAR_HEIGHT,
+    height: 0,
   },
   body: {
     height: BODY_HEIGHT,
@@ -78,7 +78,7 @@ let styles = StyleSheet.create({
     color: '#fff',
     fontSize: 17,
     fontWeight: 'bold',
-    marginTop: TITLE_MARGIN_TOP,
+    marginTop: 4,
     alignSelf: 'center',
   },
 });

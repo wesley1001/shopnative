@@ -130,8 +130,8 @@ let styles = StyleSheet.create({
   gallery: {
     flex: 0,
     alignSelf: 'center',
-    marginTop: 16,
-    marginBottom: 12,
+    marginTop: 6,
+    marginBottom: 2,
   },
   boxes: {
     alignSelf: 'center',
