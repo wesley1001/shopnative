@@ -31,9 +31,7 @@ let {
 // StatusBarIOS.setStyle('light-content');
 
 const UI_COLOR = "rgb(232, 81, 81)";
-import ExHome from './ExHome';
-import HomeScreen from './src/index';
-import RouteMapper from './src/utils/route-mapper';
+import ExHome from './src/scenes/ExHome';
 
 class MainScreen extends React.Component {
   constructor(props, context) {
@@ -48,6 +46,15 @@ class MainScreen extends React.Component {
         height:0,
         opacity:0
       },
+    }
+  }
+
+  static childContextTypes = {
+    uiColor: PropTypes.string
+  };
+  getChildContext() {
+    return {
+      uiColor: UI_COLOR
     }
   }
 
@@ -158,21 +165,6 @@ class MainScreen extends React.Component {
           {this._addNavigator(ExHome,'Home')}
         </TabBarIOS.Item>
       </TabBarIOS>
-    );
-  }
-
-  static childContextTypes = {
-    uiColor: PropTypes.string
-  };
-  getChildContext() {
-    return {
-      uiColor: UI_COLOR
-    }
-  }
-  _renderScene(route, navigator) {
-    var Component = route.component;
-    return (
-      <Component {...route.props} navigator={navigator} route={route} />
     );
   }
 }
