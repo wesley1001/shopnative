@@ -18,16 +18,16 @@ class CarouselWrapper extends Component {
       <Carousel
         indicatorAtBottom={true}
         indicatorOffset={-100}
-        delay={1000}
+        delay={3000}
         style={styles.carousel}>
         <View style={styles.container}>
-          <Text>Tile 1</Text>
+          <Text>Electronics</Text>
         </View>
         <View style={styles.container}>
-          <Text>Tile 2</Text>
+          <Text>Home and Furniture</Text>
         </View>
         <View style={styles.container}>
-          <Text>Tile 3</Text>
+          <Text>Grocery</Text>
         </View>
       </Carousel>
     );
@@ -36,10 +36,10 @@ class CarouselWrapper extends Component {
 
 const styles = StyleSheet.create({
   carousel: {
-    width: 375,
+    width: 320,
   },
   container: {
-    width: 375,
+    width: 320,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

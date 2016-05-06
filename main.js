@@ -32,6 +32,9 @@ let {
 
 const UI_COLOR = "rgb(232, 81, 81)";
 import ExHome from './src/scenes/ExHome';
+// available only NativeModules.RNVectorIconsManager || NativeModules.RNVectorIconsModule
+import Icon from 'react-native-vector-icons/Ionicons';
+// import FAIcon from "react-native-vector-icons/FontAwesome";
 
 class MainScreen extends React.Component {
   constructor(props, context) {
@@ -156,16 +159,54 @@ class MainScreen extends React.Component {
     }
 
     return (
-      <TabBarIOS >
-        <TabBarIOS.Item
+      <TabBarIOS
+        tintColor="black"
+        barTintColor="#3abeff">
+        <Icon.TabBarItemIOS
           title="Home"
-          selected={this.state.selectedTab ==='home'}
+          iconName="ios-home-outline"
+          selectedIconName="ios-home"
+          selected={this.state.selectedTab === 'home'}
           onPress={this._selectTab.bind(this,'home')}
           >
           {this._addNavigator(ExHome,'Home')}
-        </TabBarIOS.Item>
+        </Icon.TabBarItemIOS>
+        <Icon.TabBarItemIOS
+          title="Recommendation"
+          iconName="ios-person-outline"
+          selectedIconName="ios-person"
+          selected={this.state.selectedTab === 'recommendation'}
+          onPress={this._selectTab.bind(this,'recommendation')}
+          >
+          {this._addNavigator(ExHome,'Recommendation')}
+        </Icon.TabBarItemIOS>
       </TabBarIOS>
     );
+
+    // return (
+    //   <TabBarIOS
+    //     tintColor="black"
+    //     barTintColor="#3abeff">
+    //     <TabBarIOS.Item
+    //       title="Home"
+    //       iconName="ios-home-outline"
+    //       selectedIconName="ios-home"
+    //       selected={this.state.selectedTab ==='home'}
+    //       onPress={this._selectTab.bind(this,'home')}
+    //       >
+    //       {this._addNavigator(ExHome,'Home')}
+    //     </TabBarIOS.Item>
+    //     <TabBarIOS.Item
+    //       title="Recommendation"
+    //       iconName="ios-person-outline"
+    //       selectedIconName="ios-person"
+    //       selected={this.state.selectedTab ==='recommendation'}
+    //       onPress={this._selectTab.bind(this,'recommendation')}
+    //       >
+    //       {this._addNavigator(ExHome,'Recommendation')}
+    //     </TabBarIOS.Item>
+    //   </TabBarIOS>
+    // );
   }
 }
 

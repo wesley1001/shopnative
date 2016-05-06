@@ -22,18 +22,15 @@ let {
   NavigatorIOS,
 } = React;
 
-import ExPhotoGallery from './ExPhotoGallery';
-import LayoutAnimationDemo from './layout-animation'; 
-import ListViewDemo from './list-view';
 
 let ExBoxes = require('./ExBoxes');
-// let ExPhotoGallery = require('./ExPhotoGallery');
-
+let ExPhotoGallery = require('./ExPhotoGallery');
 let ExScreen = require('./ExScreen');
 // import does not work !!!!
 // import { CarouselWrapper } from "./src/scenes/carousel-wrapper";
-let CarouselWrapper = require("./carousel-wrapper");
+let CarouselWrapper = require("./src/scenes/carousel-wrapper");
 
+let HORIZ_SPACE = 12;
 
 class ExHome extends React.Component {
   constructor(props, context) {
@@ -42,17 +39,6 @@ class ExHome extends React.Component {
       headerColor: '#007aff',
       isBoxPressed: false,
     };
-  }
-
-  _handleColorSelected(color) {
-    this.setState({ headerColor: color });
-  }
-
-  componentDidMount() {
-    if (StatusBarIOS) {
-      StatusBar.setBarStyle('light-content', true);
-      StatusBar.setHidden(false, 'fade');
-    }
   }
 
   render() {
@@ -68,14 +54,19 @@ class ExHome extends React.Component {
         scrollEnabled={!this.state.isBoxPressed}
         style={styles.container}>
 
+        {/* Try editing this text and reloading your project in Exponent 
+          <Text style={styles.paragraph}>
+          Welcome to P13N@walmartlabs.com
+        </Text>
+        */}
+
         {/* Photo gallery demo */}
         <ExPhotoGallery style={styles.gallery} />
 
         <Text style={styles.sectionTitle}>Trending Items </Text>
         <CarouselWrapper />
+        
 
-        <ListViewDemo />
-        <LayoutAnimationDemo />
         {/* Bouncy boxes demo 
         <Text style={styles.sectionTitle}>Interactive Components</Text>
         <ExBoxes
@@ -94,10 +85,19 @@ class ExHome extends React.Component {
       </ExScreen>
     );
   }
+
+  componentDidMount() {
+    if (StatusBarIOS) {
+      StatusBar.setBarStyle('light-content', true);
+      StatusBar.setHidden(false, 'fade');
+    }
+  }
+
+  _handleColorSelected(color) {
+    this.setState({ headerColor: color });
+  }
 }
 
-
-let HORIZ_SPACE = 12;
 let styles = StyleSheet.create({
   container: {
     flex: 1,
