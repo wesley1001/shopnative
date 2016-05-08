@@ -13,6 +13,7 @@ const {
 } = React;
 
 class CarouselWrapper extends Component {
+  
   render() {
     return (
       <Carousel
