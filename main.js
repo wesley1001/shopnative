@@ -40,8 +40,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 // var { TabBarIOS } = require('react-native-icons');
 let TabBarItemIOS = TabBarIOS.Item;
 
-import {Scene, Router, TabBar, Modal, Schema, Actions, Reducer} from 'react-native-router-flux'
-import Example from "./Example";
+import Example from "./landing";
 
 class MainScreen extends React.Component {
   constructor(props, context) {
