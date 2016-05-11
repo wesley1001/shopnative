@@ -22,14 +22,16 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class extends React.Component {
-    render(){
-        return (
-            <View style={styles.container}>
-                <Text>Register page</Text>
-                <Button onPress={Actions.home}>Replace screen</Button>
-                <Button onPress={Actions.pop}>Back</Button>
-            </View>
-        );
-    }
-}
+class Register extends React.Component {
+  render(){
+    return (
+      <View style={styles.container}>
+        <Text>Register page</Text>
+        <Button onPress={Actions.home}> Go to Home</Button>
+        <Button onPress={Actions.pop}>Back</Button>
+      </View>
+    );
+  }
+};
+
+module.exports = Register;

@@ -23,14 +23,14 @@ var styles = StyleSheet.create({
 });
 
 class Home extends React.Component {
-    render(){
-        return (
-            <View style={styles.container}>
-                <Text>Replace screen</Text>
-                <Button onPress={Actions.pop}>Back</Button>
-            </View>
-        );
-    }
+  render(){
+    return (
+      <View style={styles.container}>
+        <Text>Home</Text>
+        <Button onPress={Actions.pop}>Back</Button>
+      </View>
+    );
+  }
 }
 
 module.exports = Home;
