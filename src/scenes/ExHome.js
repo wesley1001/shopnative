@@ -1,8 +1,4 @@
 /**
- * This is the entry point for your experience that you will run on Exponent.
- *
- * Start by looking at the render() method of the component called
- * FirstExperience. This is where the text and example components are.
  */
 'use strict';
 
@@ -22,7 +18,10 @@ let {
   NavigatorIOS,
 } = React;
 
-import ExPhotoGallery from './ExPhotoGallery';
+import { Provider, connect } from 'react-redux';
+import { RouterWithRedux, configureStore} from "../store/index";
+
+import {default as ExPhotoGallery} from './ExPhotoGallery';
 import LayoutAnimationDemo from './layout-animation'; 
 import ListViewDemo from './list-view';
 
@@ -38,6 +37,8 @@ let CarouselWrapper = require("./carousel-wrapper");
 class ExHome extends React.Component {
   constructor(props, context) {
     super(props, context);
+    this.store = configureStore({});
+
     this.state = {
       headerColor: '#007aff',
       isBoxPressed: false,
@@ -62,36 +63,37 @@ class ExHome extends React.Component {
     ];
 
     return (
-      <ExScreen
-        title="Welcome P13N@walmartlabs"
-        headerColor={this.state.headerColor}
-        scrollEnabled={!this.state.isBoxPressed}
-        style={styles.container}>
+      <Provider store={this.store}>
+          <ExScreen
+            title="Welcome P13N@walmartlabs"
+            headerColor={this.state.headerColor}
+            scrollEnabled={!this.state.isBoxPressed}
+            style={styles.container}>
 
-        {/* Photo gallery demo */}
-        <ExPhotoGallery style={styles.gallery} />
+            {/* Photo gallery demo        */}
+            <ExPhotoGallery style={styles.gallery} />
+            
+            <Text style={styles.sectionTitle}>Trending Items </Text>
+            <CarouselWrapper />
 
-        <Text style={styles.sectionTitle}>Trending Items </Text>
-        <CarouselWrapper />
-
-        <ListViewDemo />
-        <LayoutAnimationDemo />
-        {/* Bouncy boxes demo 
-        <Text style={styles.sectionTitle}>Interactive Components</Text>
-        <ExBoxes
-          colors={boxColors}
-          onPressBoxBegin={() => this.setState({ isBoxPressed: true })}
-          onPressBoxEnd={() => this.setState({ isBoxPressed: false })}
-          onSelectColor={this._handleColorSelected.bind(this)}
-          style={styles.boxes}
-        />
-        <Text style={styles.note}>
-          Tap the boxes to change the color of the status bar. Press down
-          and drag them to see them bounce back with spring physics.
-        </Text>
-        */}
-
-      </ExScreen>
+            <ListViewDemo />
+            <LayoutAnimationDemo />
+            {/* Bouncy boxes demo 
+            <Text style={styles.sectionTitle}>Interactive Components</Text>
+            <ExBoxes
+              colors={boxColors}
+              onPressBoxBegin={() => this.setState({ isBoxPressed: true })}
+              onPressBoxEnd={() => this.setState({ isBoxPressed: false })}
+              onSelectColor={this._handleColorSelected.bind(this)}
+              style={styles.boxes}
+            />
+            <Text style={styles.note}>
+              Tap the boxes to change the color of the status bar. Press down
+              and drag them to see them bounce back with spring physics.
+            </Text>
+            */}
+          </ExScreen>
+      </Provider>
     );
   }
 }

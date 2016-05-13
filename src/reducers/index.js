@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 const initialState = {
   scene: {},
+  irsDataMap: {}
 };
 
 export const routes = (state = initialState, action = {}) => {
@@ -20,7 +21,21 @@ export const routes = (state = initialState, action = {}) => {
   }
 }
 
+export const irsDataMap = (state = initialState, action = {}) => {
+  switch (action.type) {
+  case "RECEIVE_IRSDATAMAP":
+    if (action.irsDataMap) {
+      const irsDataObj = get(action, "irsDataMap", {});
+      return assign({}, state, irsDataObj);
+    }
+    return state;
+
+  default:
+    return state;
+  }
+}
+
 export default combineReducers({
-  routes
-  // ... other reducers
+  routes,
+  irsDataMap
 });

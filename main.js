@@ -247,8 +247,8 @@ let styles = StyleSheet.create({
   }
 });
 
-// AppRegistry.registerComponent('main', () => MainScreen);
-AppRegistry.registerComponent('main', () => Example);
+AppRegistry.registerComponent('main', () => MainScreen);
+// AppRegistry.registerComponent('main', () => Example);
 
 // --------------- working version --------------------------
 // 'use strict';

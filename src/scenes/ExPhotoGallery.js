@@ -8,6 +8,10 @@ let {
   View,
 } = React;
 
+import { connect } from 'react-redux';
+
+// import { ajaxRequest } from "../action/recommendation";
+
 let PHOTO_SPACING = 6;
 
 let IMAGE_SOURCES = [
@@ -16,6 +20,28 @@ let IMAGE_SOURCES = [
   {uri: 'http://i5.wal.co/dfw/4ff9c6c9-f7b2/k2-_252e9465-c782-4395-a355-68cc3cde6777.v1.jpg'},
   {uri: 'http://i5.wal.co/dfw/4ff9c6c9-bdae/k2-_4c974574-6fe3-465f-b450-c1d916bc4b4f.v1.jpg'},
 ];
+
+let styles = StyleSheet.create({
+  container: {
+    flex: 0,
+    width: 320 + PHOTO_SPACING,
+    alignSelf: 'flex-start',
+    marginTop: 0,
+    marginBottom: 6,
+    overflow: 'visible',
+  },
+  photoContainer: {
+    marginHorizontal: PHOTO_SPACING / 2,
+    overflow: 'visible',
+    shadowRadius: 3,
+    shadowColor: '#000',
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 1 },
+  },
+  photo: {
+    overflow: 'visible',
+  },
+});
 
 class ExPhotoGallery extends React.Component {
   render() {
@@ -43,26 +69,28 @@ class ExPhotoGallery extends React.Component {
   }
 }
 
-let styles = StyleSheet.create({
-  container: {
-    flex: 0,
-    width: 320 + PHOTO_SPACING,
-    alignSelf: 'flex-start',
-    marginTop: 0,
-    marginBottom: 6,
-    overflow: 'visible',
-  },
-  photoContainer: {
-    marginHorizontal: PHOTO_SPACING / 2,
-    overflow: 'visible',
-    shadowRadius: 3,
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 0, height: 1 },
-  },
-  photo: {
-    overflow: 'visible',
-  },
-});
+const mapStateToProps = (state) => {
+  return {
+    // items: state.irsDataMap
+  }
+}
 
-module.exports = ExPhotoGallery;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAjaxRequest: (id) => {
+      // dispatch(ajaxRequest("Homepage", "46195964", {}));
+    }
+  }
+}
+
+// const StatefulExPhotoGallery = connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(ExPhotoGallery);
+
+const StatefulExPhotoGallery = connect(
+)(ExPhotoGallery);
+
+export default StatefulExPhotoGallery;
+// export default ExPhotoGallery;
+

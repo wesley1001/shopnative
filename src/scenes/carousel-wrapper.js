@@ -12,8 +12,7 @@ const {
   View
 } = React;
 
-class CarouselWrapper extends Component {
-  
+class CarouselWrapper extends Component {  
   render() {
     return (
       <Carousel
