@@ -21,14 +21,12 @@ let {
 import { Provider, connect } from 'react-redux';
 import { RouterWithRedux, configureStore} from "../store/index";
 
-import {default as ExPhotoGallery} from './ExPhotoGallery';
 import LayoutAnimationDemo from './layout-animation'; 
 import ListViewDemo from './list-view';
 
-let ExBoxes = require('./ExBoxes');
-// let ExPhotoGallery = require('./ExPhotoGallery');
-
-let ExScreen = require('./ExScreen');
+import ExScreen from "./ExScreen";
+import ExBoxes from "./ExBoxes";
+import {default as ExPhotoGallery} from './ExPhotoGallery';
 // import does not work !!!!
 // import { CarouselWrapper } from "./src/scenes/carousel-wrapper";
 let CarouselWrapper = require("./carousel-wrapper");

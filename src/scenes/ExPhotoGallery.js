@@ -10,7 +10,7 @@ let {
 
 import { connect } from 'react-redux';
 
-// import { ajaxRequest } from "../action/recommendation";
+import { ajaxRequest } from "../action/recommendation";
 
 let PHOTO_SPACING = 6;
 
@@ -44,8 +44,16 @@ let styles = StyleSheet.create({
 });
 
 class ExPhotoGallery extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    if (!props.items) {
+      props.onAjaxRequest("EMPTY");
+    }
+  }
+
   render() {
-    return (
+    const itemImgs = this.props.items;
+    return itemImgs ? (
       <ScrollView
         horizontal
         scrollsToTop={false}
@@ -53,11 +61,11 @@ class ExPhotoGallery extends React.Component {
         showsHorizontalScrollIndicator={false}
         pagingEnabled
         style={[styles.container, this.props.style]}>
-        {IMAGE_SOURCES.map(source =>
+        {itemImgs.map(source =>
           this._renderPhoto(source, { width: 320, height: 240 })
         )}
       </ScrollView>
-    );
+    ) : null;
   }
 
   _renderPhoto(source, size) {
@@ -69,28 +77,34 @@ class ExPhotoGallery extends React.Component {
   }
 }
 
+ExPhotoGallery.propTypes = {
+  items: React.PropTypes.array,
+  onAjaxRequest: React.PropTypes.func
+};
+
+ExPhotoGallery.defaultProps = {
+  // items: IMAGE_SOURCES
+};
+
 const mapStateToProps = (state) => {
   return {
-    // items: state.irsDataMap
+    items: state.irsDataMap.irsData
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onAjaxRequest: (id) => {
-      // dispatch(ajaxRequest("Homepage", "46195964", {}));
+      dispatch(ajaxRequest("Homepage", "46195964", {}));
     }
   }
 }
 
-// const StatefulExPhotoGallery = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(ExPhotoGallery);
-
 const StatefulExPhotoGallery = connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(ExPhotoGallery);
 
+
 export default StatefulExPhotoGallery;
-// export default ExPhotoGallery;
 

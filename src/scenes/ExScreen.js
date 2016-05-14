@@ -8,7 +8,8 @@ let {
   View,
 } = React;
 
-let ExHeader = require('./ExHeader');
+// let ExHeader = require('./ExHeader');
+import ExHeader from "./ExHeader";
 
 const STATUS_BAR_HEIGHT = 0;
 
@@ -22,7 +23,7 @@ class ExScreen extends React.Component {
   }
 
   render() {
-    let {
+    const {
       title,
       headerColor,
       scrollEnabled,
