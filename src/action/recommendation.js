@@ -2,8 +2,10 @@ let React = require('react-native');
 let {
   AlertIOS
 } = React;
+// import Promise from "bluebird";
+// import {fetch} from "isomorphic-fetch";
 
-import fetchIrsDataMap from "../fetch/fetcher";
+import { fetchIrsDataMap } from "../fetch/fetcher";
 
 export const REQUEST_RECOMMENDATION = "REQUEST_RECOMMENDATION";
 export const RECEIVE_IRSDATAMAP = "RECEIVE_IRSDATAMAP";
@@ -60,12 +62,14 @@ export const ajaxRequest = (page, parentItemId, queryParams = {}) => (dispatch) 
       {uri: 'http://i5.wal.co/dfw/4ff9c6c9-bdae/k2-_4c974574-6fe3-465f-b450-c1d916bc4b4f.v1.jpg'}
     ]
   };
-  return dispatch(receiveIrsDataMap(MOCK_IMAGE_SOURCES))
+  return dispatch(receiveIrsDataMap(MOCK_IMAGE_SOURCES));
   // return fetchIrsDataMap(opts)
   //   .then((responseJSON) => {
-  //     dispatch(receiveIrsDataMap(responseJSON));
+  //     // dispatch(receiveIrsDataMap(responseJSON));
+  //     return dispatch(receiveIrsDataMap(MOCK_IMAGE_SOURCES));
   //   })
   //   .catch((err) => {
-  //     throw err;
+  //     // throw err;
+  //     return dispatch(receiveIrsDataMap(MOCK_IMAGE_SOURCES));
   //   });
 };
