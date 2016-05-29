@@ -4,25 +4,25 @@ this is build with react-native and exponentjs.
 
 ## Installation
 
-```
 	git clone https://github.com/life0fun/shopnative.git
 	npm cache clean && npm i
 	npm i buffer
-```
+
 
 restart packager with clear cache.
-```
+
 	node_modules/react-native/packager/packager.sh --reset-cache
-```
+
 
 ## usage
-send link to exp.host to your phone.
+
+When testing in ios simulator, the url in exponentjs is `localhost:19004`.
+
+When sending link to exp.host to your phone.
 The link is defined in .exponent/packager-info.json
 
-```
 	ngrok": "http://jf-78i.colorcloud.shopnative.exp.direct"
 	exp://jd-6h5.colorcloud.shop.exp.direct:80
-```
 
 ## Run
 
@@ -31,12 +31,12 @@ Entry point is defined in package.json
 	"main": "main.js",
 
 landing.js experiments RouterWithRedux with connect()(Router) to Actions with scenes;
-```
+
 	<Provider store={this.store}>
         <RouterWithRedux scenes={scenes}>
         </RouterWithRedux>
      </Provider>
-```
+
 
 ## Debug
 

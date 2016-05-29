@@ -4,6 +4,9 @@ let {
 } = React;
 // import Promise from "bluebird";
 // import {fetch} from "isomorphic-fetch";
+import extend from "lodash/extend";
+import isEmpty from "lodash/isEmpty";
+import pick from "lodash/pick";
 
 import { fetchIrsDataMap, fetchPage } from "../fetch/fetcher";
 
@@ -95,9 +98,31 @@ export const fetchHomePage = (page, queryParams = {}) => (dispatch) => {
   };
   return fetchPage("http://www.walmart.com", opts)
     .then((responseHtml) => {
-      dispatch(receiveP13nBanner(BANNER));
+      const p13nBanner = [];
+      const wideImg = /<img class=img-hide-alt width=1364 .* data-lazy="(.+?)"/g;
+      const matched = getMatches(responseHtml, wideImg, 1);
+      matched.forEach( (uri) => {
+        p13nBanner.push({
+          uri: uri
+        });
+      });
+      console.log(" fetched data ---> ", p13nBanner);
+      // dispatch(receiveP13nBanner(BANNER));
+      dispatch(receiveP13nBanner({
+        p13nBanner
+      }));
     })
     .catch((err) => {
       throw err;
     });
+};
+
+export const getMatches = (text, patten, index) => {
+  let idx = index || 1; // default to the first capturing group
+  const matches = [];
+  let match;
+  while (match = patten.exec(text)) {
+    matches.push(match[idx]);
+  }
+  return matches;
 };

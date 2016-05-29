@@ -89,10 +89,8 @@ export const fetchPage = (url, opt) => {
           err: `service response ${res.status}`
         };
       }
-      return res.text();
+      return res.text();  // response is rendered html as plain/text
     }).then((data) => {
-      // return data.text();
-      console.warn("data --> ", data);
       return data;
     }).catch((err) => {
       console.warn("err --> ", err);
