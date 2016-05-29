@@ -10,7 +10,10 @@ let {
 
 import { connect } from 'react-redux';
 
-import { ajaxRequest, fetchHomePage } from "../action/recommendation";
+// import does not work, only require works here.
+// import { Carousel } from 'react-native-carousel';
+let Carousel = require('react-native-carousel');
+import { ajaxRequest } from "../action/recommendation";
 
 let PHOTO_SPACING = 6;
 
@@ -46,7 +49,7 @@ let styles = StyleSheet.create({
 //
 // ajax fetcher to request fetcher
 //
-class ExPhotoGallery extends React.Component {
+class ExCarousel extends React.Component {
   constructor(props, context) {
     super(props, context);
     if (!props.items) {
@@ -57,17 +60,21 @@ class ExPhotoGallery extends React.Component {
   render() {
     const itemImgs = this.props.items;
     return itemImgs ? (
-      <ScrollView
-        horizontal
-        scrollsToTop={false}
-        automaticallyAdjustContentInsets={false}
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        style={[styles.container, this.props.style]}>
-        {itemImgs.map(source =>
-          this._renderPhoto(source, { width: 320, height: 240 })
-        )}
-      </ScrollView>
+      <Carousel
+        indicatorAtBottom={true}
+        indicatorOffset={-100}
+        delay={3000}
+        style={styles.carousel}>
+        <View style={styles.container}>
+          <Text>Electronics</Text>
+        </View>
+        <View style={styles.container}>
+          <Text>Home and Furniture</Text>
+        </View>
+        <View style={styles.container}>
+          <Text>Grocery</Text>
+        </View>
+      </Carousel>
     ) : null;
   }
 
@@ -80,37 +87,33 @@ class ExPhotoGallery extends React.Component {
   }
 }
 
-ExPhotoGallery.propTypes = {
+ExCarousel.propTypes = {
   items: React.PropTypes.array,
   onAjaxRequest: React.PropTypes.func
 };
 
-ExPhotoGallery.defaultProps = {
+ExCarousel.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  // return {
-  //   items: state.irsDataMap.irsData
-  // }
   return {
-    items: state.irsDataMap.p13nBanner
+    items: state.irsDataMap.irsData
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onAjaxRequest: (parentItemId) => {
-      // dispatch(ajaxRequest("Homepage", parentItemId, {}));
-      dispatch(fetchHomePage("Homepage", {}));
+      dispatch(ajaxRequest("Homepage", parentItemId, {}));
     }
   }
 }
 
-const StatefulExPhotoGallery = connect(
+const StatefulExCarousel = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ExPhotoGallery);
+)(ExCarousel);
 
 
-export default StatefulExPhotoGallery;
+export default StatefulExCarousel;
 

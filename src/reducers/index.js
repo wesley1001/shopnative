@@ -38,7 +38,11 @@ export const irsDataMap = (state = initialState, action = {}) => {
       return assign({}, state, MOCK_IMAGE_SOURCES);
     }
     return state;
-
+  case "RECEIVE_P13NBANNER":
+    if (action.data) {
+      const bannerData = get(action, "data", {});
+      return assign({}, state, bannerData);
+    }
   default:
     return state;
   }

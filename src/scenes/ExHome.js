@@ -27,10 +27,13 @@ import ListViewDemo from './list-view';
 import ExScreen from "./ExScreen";
 import ExBoxes from "./ExBoxes";
 import {default as ExPhotoGallery} from './ExPhotoGallery';
-// import does not work !!!!
+// import does not work for carouselWrapper !!!!
 // import { CarouselWrapper } from "./src/scenes/carousel-wrapper";
 let CarouselWrapper = require("./carousel-wrapper");
 
+//
+// Root component wraps with Provider and configs store.
+//
 
 class ExHome extends React.Component {
   constructor(props, context) {
@@ -62,35 +65,35 @@ class ExHome extends React.Component {
 
     return (
       <Provider store={this.store}>
-          <ExScreen
-            title="Welcome P13N@walmartlabs"
-            headerColor={this.state.headerColor}
-            scrollEnabled={!this.state.isBoxPressed}
-            style={styles.container}>
+        <ExScreen
+          title="Welcome P13N@walmartlabs"
+          headerColor={this.state.headerColor}
+          scrollEnabled={!this.state.isBoxPressed}
+          style={styles.container}>
 
-            {/* Photo gallery demo        */}
-            <ExPhotoGallery style={styles.gallery} />
-            
-            <Text style={styles.sectionTitle}>Trending Items </Text>
-            <CarouselWrapper />
+          {/* Photo gallery demo        */}
+          <ExPhotoGallery style={styles.gallery} />
+          
+          <Text style={styles.sectionTitle}>Trending Items </Text>
+          <CarouselWrapper />
 
-            <ListViewDemo />
-            <LayoutAnimationDemo />
-            {/* Bouncy boxes demo 
-            <Text style={styles.sectionTitle}>Interactive Components</Text>
-            <ExBoxes
-              colors={boxColors}
-              onPressBoxBegin={() => this.setState({ isBoxPressed: true })}
-              onPressBoxEnd={() => this.setState({ isBoxPressed: false })}
-              onSelectColor={this._handleColorSelected.bind(this)}
-              style={styles.boxes}
-            />
-            <Text style={styles.note}>
-              Tap the boxes to change the color of the status bar. Press down
-              and drag them to see them bounce back with spring physics.
-            </Text>
-            */}
-          </ExScreen>
+          <ListViewDemo />
+          <LayoutAnimationDemo />
+          {/* Bouncy boxes demo 
+          <Text style={styles.sectionTitle}>Interactive Components</Text>
+          <ExBoxes
+            colors={boxColors}
+            onPressBoxBegin={() => this.setState({ isBoxPressed: true })}
+            onPressBoxEnd={() => this.setState({ isBoxPressed: false })}
+            onSelectColor={this._handleColorSelected.bind(this)}
+            style={styles.boxes}
+          />
+          <Text style={styles.note}>
+            Tap the boxes to change the color of the status bar. Press down
+            and drag them to see them bounce back with spring physics.
+          </Text>
+          */}
+        </ExScreen>
       </Provider>
     );
   }

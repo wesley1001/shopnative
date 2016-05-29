@@ -13,6 +13,9 @@ import NavigationDrawer from './src/components/NavigationDrawer';
 
 import { RouterWithRedux, configureStore} from "./src/store/index";
 
+//
+// this module experiments RouterWithRedux with connect()(Router);
+//
 
 class TabIcon extends React.Component {
   render(){

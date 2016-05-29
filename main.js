@@ -31,16 +31,16 @@ let {
 // StatusBarIOS.setStyle('light-content');
 
 const UI_COLOR = "rgb(232, 81, 81)";
+import Example from "./landing";
 import ExHome from './src/scenes/ExHome';
-// available only NativeModules.RNVectorIconsManager || NativeModules.RNVectorIconsModule
-import Icon from 'react-native-vector-icons/Ionicons';
 // import FAIcon from "react-native-vector-icons/FontAwesome";
 
+// <Icon.TabBarItemIOS ...> not working as it is native icon, not pure js.
+// import Icon from 'react-native-vector-icons/Ionicons';
 // import TabBarIOS from 'react-native-icons/index.ios.js';
 // var { TabBarIOS } = require('react-native-icons');
 let TabBarItemIOS = TabBarIOS.Item;
 
-import Example from "./landing";
 
 class MainScreen extends React.Component {
   constructor(props, context) {
@@ -61,6 +61,7 @@ class MainScreen extends React.Component {
   static childContextTypes = {
     uiColor: PropTypes.string
   };
+
   getChildContext() {
     return {
       uiColor: UI_COLOR
@@ -90,26 +91,6 @@ class MainScreen extends React.Component {
   _addNavigator(component, title) {
     let data = null;
     // if(this.state.selectedTab ==='home'|| this.state.selectedTab==='market') {
-    //   return 
-    //     <NavigatorIOS
-    //       style={{flex:1}}
-    //       barTintColor='#6bb967'
-    //       titleTextColor="#fff"
-    //       tintColor="#fff"
-    //       translucent={false}
-    //       initialRoute={
-    //         {
-    //           component: component,
-    //           title: title,
-    //           rightButtonTitle:"搜索",
-    //           onRightButtonPress: () => this._search(),
-    //           leftButtonTitle:"扫一扫",
-    //           onLeftButtonPress:() => this._scan(),
-    //           passProps:{
-    //             data: data
-    //          }
-    //         }} 
-    //     />;
     // }
 
     return <NavigatorIOS
@@ -127,12 +108,6 @@ class MainScreen extends React.Component {
         }
       }} />;
   }
-
-  // _renderLogin() {
-  //   return (
-  //       <Login/>
-  //     );
-  // },
 
   _renderNewTab (component, title) {
     const lastTab = this.state.lastTab;
@@ -164,31 +139,8 @@ class MainScreen extends React.Component {
       return this._renderNewTab(Scan,'Scan');
     }
 
-    // return (
-    //   <TabBarIOS
-    //     tintColor="black"
-    //     barTintColor="#3abeff">
-    //     <Icon.TabBarItemIOS
-    //       title="Home"
-    //       iconName="ios-home-outline"
-    //       selectedIconName="ios-home"
-    //       selected={this.state.selectedTab === 'home'}
-    //       onPress={this._selectTab.bind(this,'home')}
-    //       >
-    //       {this._addNavigator(ExHome,'Home')}
-    //     </Icon.TabBarItemIOS>
-    //     <Icon.TabBarItemIOS
-    //       title="Recommendation"
-    //       iconName="ios-person-outline"
-    //       selectedIconName="ios-person"
-    //       selected={this.state.selectedTab === 'recommendation'}
-    //       onPress={this._selectTab.bind(this,'recommendation')}
-    //       >
-    //       {this._addNavigator(ExHome,'Recommendation')}
-    //     </Icon.TabBarItemIOS>
-    //   </TabBarIOS>
-    // );
-
+    // <Icon.TabBarItemIOS ...> not working as it is native icon, not pure js.
+    
     return (
       <TabBarIOS
         tintColor="black"
@@ -202,6 +154,7 @@ class MainScreen extends React.Component {
           >
           {this._addNavigator(ExHome,'Home')}
         </TabBarItemIOS>
+
         <TabBarItemIOS
           title="Recommendation"
           iconName={'ion|ios-paper-outline'}
@@ -213,31 +166,6 @@ class MainScreen extends React.Component {
         </TabBarItemIOS>
       </TabBarIOS>
     );
-
-    // return (
-    //   <TabBarIOS
-    //     tintColor="black"
-    //     barTintColor="#3abeff">
-    //     <TabBarIOS.Item
-    //       title="Home"
-    //       iconName="ios-home-outline"
-    //       selectedIconName="ios-home"
-    //       selected={this.state.selectedTab ==='home'}
-    //       onPress={this._selectTab.bind(this,'home')}
-    //       >
-    //       {this._addNavigator(ExHome,'Home')}
-    //     </TabBarIOS.Item>
-    //     <TabBarIOS.Item
-    //       title="Recommendation"
-    //       iconName="ios-person-outline"
-    //       selectedIconName="ios-person"
-    //       selected={this.state.selectedTab ==='recommendation'}
-    //       onPress={this._selectTab.bind(this,'recommendation')}
-    //       >
-    //       {this._addNavigator(ExHome,'Recommendation')}
-    //     </TabBarIOS.Item>
-    //   </TabBarIOS>
-    // );
   }
 }
 

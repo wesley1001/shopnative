@@ -6,6 +6,7 @@ import reducers from '../reducers/index';
 
 export const RouterWithRedux = connect()(Router);
 
+// compose ( createStore => applyMiddleware(thunk) ) => reducers and init state.
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware)
 )(createStore);

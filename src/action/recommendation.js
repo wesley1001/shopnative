@@ -5,10 +5,11 @@ let {
 // import Promise from "bluebird";
 // import {fetch} from "isomorphic-fetch";
 
-import { fetchIrsDataMap } from "../fetch/fetcher";
+import { fetchIrsDataMap, fetchPage } from "../fetch/fetcher";
 
 export const REQUEST_RECOMMENDATION = "REQUEST_RECOMMENDATION";
 export const RECEIVE_IRSDATAMAP = "RECEIVE_IRSDATAMAP";
+export const RECEIVE_P13NBANNER = "RECEIVE_P13NBANNER";
 export const INVALIDATE_RECOMMENDATION = "INVALIDATE_RECOMMENDATION";
 export const SELECT_RECOMMENDATION = "SELECT_RECOMMENDATION";
 export const P13N_RENDERED = "P13N_RENDERED";
@@ -42,6 +43,13 @@ export const receiveIrsDataMap = (data) => {
   };
 };
 
+export const receiveP13nBanner = (data) => {
+  return {
+    type: RECEIVE_P13NBANNER,
+    data
+  };
+};
+
 export const p13nTileClicked = () => {
   return {
     type: P13N_TILE_CLICKED
@@ -62,14 +70,34 @@ export const ajaxRequest = (page, parentItemId, queryParams = {}) => (dispatch) 
       {uri: 'http://i5.wal.co/dfw/4ff9c6c9-bdae/k2-_4c974574-6fe3-465f-b450-c1d916bc4b4f.v1.jpg'}
     ]
   };
-  return dispatch(receiveIrsDataMap(MOCK_IMAGE_SOURCES));
-  // return fetchIrsDataMap(opts)
-  //   .then((responseJSON) => {
-  //     // dispatch(receiveIrsDataMap(responseJSON));
-  //     return dispatch(receiveIrsDataMap(MOCK_IMAGE_SOURCES));
-  //   })
-  //   .catch((err) => {
-  //     // throw err;
-  //     return dispatch(receiveIrsDataMap(MOCK_IMAGE_SOURCES));
-  //   });
+  return fetchIrsDataMap(opts)
+    .then((responseJSON) => {
+      dispatch(receiveIrsDataMap(responseJSON));
+      // return dispatch(receiveIrsDataMap(MOCK_IMAGE_SOURCES));
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
+export const fetchHomePage = (page, queryParams = {}) => (dispatch) => {
+  const opts = {
+    ...queryParams,
+    page
+  };
+  const BANNER = {
+    p13nBanner: [
+      {uri: 'http://i5.wal.co/dfw/4ff9c6c9-8c0a/k2-_a9517a22-823c-42e5-8bfb-45e73ac0c4c0.v1.jpg'},
+      {uri: 'http://i5.wal.co/dfw/4ff9c6c9-7239/k2-_a78a666c-62a0-4ab1-884d-93b9c08328a4.v1.jpg'},
+      {uri: 'http://i5.wal.co/dfw/4ff9c6c9-f7b2/k2-_252e9465-c782-4395-a355-68cc3cde6777.v1.jpg'},
+      {uri: 'http://i5.wal.co/dfw/4ff9c6c9-bdae/k2-_4c974574-6fe3-465f-b450-c1d916bc4b4f.v1.jpg'}
+    ]
+  };
+  return fetchPage("http://www.walmart.com", opts)
+    .then((responseHtml) => {
+      dispatch(receiveP13nBanner(BANNER));
+    })
+    .catch((err) => {
+      throw err;
+    });
 };
