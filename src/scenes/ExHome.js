@@ -27,6 +27,7 @@ import ListViewDemo from './list-view';
 import ExScreen from "./ExScreen";
 import ExBoxes from "./ExBoxes";
 import {default as ExPhotoGallery} from './ExPhotoGallery';
+import {default as ExCarousel} from './ExCarousel';
 // import does not work for carouselWrapper !!!!
 // import { CarouselWrapper } from "./src/scenes/carousel-wrapper";
 let CarouselWrapper = require("./carousel-wrapper");
@@ -75,6 +76,8 @@ class ExHome extends React.Component {
           <ExPhotoGallery style={styles.gallery} />
           
           <Text style={styles.sectionTitle}>Trending Items </Text>
+          <ExCarousel />
+
           <CarouselWrapper />
 
           <ListViewDemo />

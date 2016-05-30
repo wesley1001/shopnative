@@ -20,15 +20,6 @@ export const queryParams = [
   "cache_pipeline"
 ];
 
-let MOCK_IMAGE_SOURCES = {
-  irsData: [
-    {uri: 'http://i5.wal.co/dfw/4ff9c6c9-8c0a/k2-_a9517a22-823c-42e5-8bfb-45e73ac0c4c0.v1.jpg'},
-    {uri: 'http://i5.wal.co/dfw/4ff9c6c9-7239/k2-_a78a666c-62a0-4ab1-884d-93b9c08328a4.v1.jpg'},
-    {uri: 'http://i5.wal.co/dfw/4ff9c6c9-f7b2/k2-_252e9465-c782-4395-a355-68cc3cde6777.v1.jpg'},
-    {uri: 'http://i5.wal.co/dfw/4ff9c6c9-bdae/k2-_4c974574-6fe3-465f-b450-c1d916bc4b4f.v1.jpg'}
-  ]
-};
-
 export const p13nFetch = (opts) => {
   // return Promise.resolve({});
 
@@ -52,11 +43,9 @@ export const p13nFetch = (opts) => {
         };
       }
       return res.json();
-      // return MOCK_IMAGE_SOURCES;
     }).then((data) => {
-      // return data.text();
-      console.warn("data --> ", data);
-      return MOCK_IMAGE_SOURCES;
+      console.log("data --> ", data);
+      return data;
     }).catch((err) => {
       console.warn("err --> ", err);
       return {err};
@@ -66,14 +55,7 @@ export const p13nFetch = (opts) => {
 export const fetchIrsDataMap = (opts) => {
   return p13nFetch(opts)
     .then((responseJSON) => {
-      // const resultDetail = responseJSON.result.resultDetail;
-      // const irsData = responseJSON.result.moduleList.reduce((dataMap, module) => {
-      //   const placementId = getPlacementSuffix(module.placementId);
-      //   dataMap[placementId] = module;
-      //   return dataMap;
-      // }, {});
-      const irsData = responseJSON;
-      return irsData;
+      return responseJSON;
     }).catch(() => {
       // If we have an error with the response don't render anything,
       // don't rethrow because that would cause the page request to return an error

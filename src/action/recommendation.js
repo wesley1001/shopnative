@@ -9,6 +9,7 @@ import isEmpty from "lodash/isEmpty";
 import pick from "lodash/pick";
 
 import { fetchIrsDataMap, fetchPage } from "../fetch/fetcher";
+import { getWideImages, getTileImages } from "../utils/regmatch";
 
 export const REQUEST_RECOMMENDATION = "REQUEST_RECOMMENDATION";
 export const RECEIVE_IRSDATAMAP = "RECEIVE_IRSDATAMAP";
@@ -42,7 +43,7 @@ export const requestRecommendation = (productId) => {
 export const receiveIrsDataMap = (data) => {
   return {
     type: RECEIVE_IRSDATAMAP,
-    irsDataMap: data
+    data
   };
 };
 
@@ -75,39 +76,41 @@ export const ajaxRequest = (page, parentItemId, queryParams = {}) => (dispatch) 
   };
   return fetchIrsDataMap(opts)
     .then((responseJSON) => {
-      dispatch(receiveIrsDataMap(responseJSON));
-      // return dispatch(receiveIrsDataMap(MOCK_IMAGE_SOURCES));
+      const moduleList = responseJSON.moduleList;
+      const irsData = moduleList.reduce((moduleMap, module) => {
+        const {moduleId, html} = module;
+        moduleMap[moduleId] = html;
+        return moduleMap;
+      }, {});
+      // {irs-6-b2: "<div....>", irs-6-b1: "<div ...>"}
+      console.log(" received irsdata ---> ", irsData);
+      dispatch(receiveIrsDataMap({
+        irsData
+      }));
     })
     .catch((err) => {
       throw err;
     });
 };
 
-export const fetchHomePage = (page, queryParams = {}) => (dispatch) => {
+export const fetchHomePage = (page, queryParams = {}, extras= {} ) => (dispatch) => {
   const opts = {
     ...queryParams,
     page
   };
-  const BANNER = {
-    p13nBanner: [
-      {uri: 'http://i5.wal.co/dfw/4ff9c6c9-8c0a/k2-_a9517a22-823c-42e5-8bfb-45e73ac0c4c0.v1.jpg'},
-      {uri: 'http://i5.wal.co/dfw/4ff9c6c9-7239/k2-_a78a666c-62a0-4ab1-884d-93b9c08328a4.v1.jpg'},
-      {uri: 'http://i5.wal.co/dfw/4ff9c6c9-f7b2/k2-_252e9465-c782-4395-a355-68cc3cde6777.v1.jpg'},
-      {uri: 'http://i5.wal.co/dfw/4ff9c6c9-bdae/k2-_4c974574-6fe3-465f-b450-c1d916bc4b4f.v1.jpg'}
-    ]
+  const MOCK_DATA = {
+    p13nBanner: extras.mockData
   };
+  const p13nBanner = [];
   return fetchPage("http://www.walmart.com", opts)
     .then((responseHtml) => {
-      const p13nBanner = [];
-      const wideImg = /<img class=img-hide-alt width=1364 .* data-lazy="(.+?)"/g;
-      const matched = getMatches(responseHtml, wideImg, 1);
+      const matched = getWideImages(responseHtml);
       matched.forEach( (uri) => {
         p13nBanner.push({
           uri: uri
         });
       });
-      console.log(" fetched data ---> ", p13nBanner);
-      // dispatch(receiveP13nBanner(BANNER));
+      // dispatch(receiveP13nBanner(MOCK_DATA));
       dispatch(receiveP13nBanner({
         p13nBanner
       }));
@@ -117,12 +120,3 @@ export const fetchHomePage = (page, queryParams = {}) => (dispatch) => {
     });
 };
 
-export const getMatches = (text, patten, index) => {
-  let idx = index || 1; // default to the first capturing group
-  const matches = [];
-  let match;
-  while (match = patten.exec(text)) {
-    matches.push(match[idx]);
-  }
-  return matches;
-};

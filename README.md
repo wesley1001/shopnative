@@ -39,9 +39,9 @@ landing.js experiments RouterWithRedux with connect()(Router) to Actions with sc
 
 
 ## Debug
-
-1. do `console.warn()` in the code.
+1. app runs at `localhost:19004` from simulator and debugger at `localhost:19005/debugger-ui`.
 2. Pressing ctrl + cmd + z in the iOS simulator kick off the debugging browser window.
 3. click live js debug remote
-4. http://localhost:19005/debugger-ui,  
+4. http://localhost:19005/debugger-ui
 5. Press ⌘⌥J (cmd+alt-J) to open Developer Tools.
+6. `console.warn()` in the code will log to dev tool console.

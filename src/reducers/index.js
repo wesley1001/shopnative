@@ -33,14 +33,16 @@ export const irsDataMap = (state = initialState, action = {}) => {
   };
   switch (action.type) {
   case "RECEIVE_IRSDATAMAP":
-    if (action.irsDataMap) {
-      const irsDataObj = get(action, "irsDataMap", {});
-      return assign({}, state, MOCK_IMAGE_SOURCES);
+    if (action.data) {
+      const irsDataObj = get(action, "data", {});
+      // irsdata 
+      return assign({}, state, irsDataObj);
     }
     return state;
   case "RECEIVE_P13NBANNER":
     if (action.data) {
       const bannerData = get(action, "data", {});
+      // bannerData is an object of {p13nBanner: []}
       return assign({}, state, bannerData);
     }
   default:
@@ -48,6 +50,10 @@ export const irsDataMap = (state = initialState, action = {}) => {
   }
 }
 
+//
+// state.irsDataMap.irsData.irs-6-b1: []
+// state.irsDataMap.p13nBanner: []
+//
 export default combineReducers({
   routes,
   irsDataMap

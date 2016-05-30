@@ -14,16 +14,9 @@ import { connect } from 'react-redux';
 // import { Carousel } from 'react-native-carousel';
 let Carousel = require('react-native-carousel');
 import { ajaxRequest } from "../action/recommendation";
+import { default as IrsDataAdapter } from "../adapters/irsdata-adapter"
 
 let PHOTO_SPACING = 6;
-
-let IMAGE_SOURCES = [
-  {uri: 'http://i5.wal.co/dfw/4ff9c6c9-8c0a/k2-_a9517a22-823c-42e5-8bfb-45e73ac0c4c0.v1.jpg'},
-  {uri: 'http://i5.wal.co/dfw/4ff9c6c9-7239/k2-_a78a666c-62a0-4ab1-884d-93b9c08328a4.v1.jpg'},
-  {uri: 'http://i5.wal.co/dfw/4ff9c6c9-f7b2/k2-_252e9465-c782-4395-a355-68cc3cde6777.v1.jpg'},
-  {uri: 'http://i5.wal.co/dfw/4ff9c6c9-bdae/k2-_4c974574-6fe3-465f-b450-c1d916bc4b4f.v1.jpg'},
-];
-
 let styles = StyleSheet.create({
   container: {
     flex: 0,
@@ -53,37 +46,38 @@ class ExCarousel extends React.Component {
   constructor(props, context) {
     super(props, context);
     if (!props.items) {
-      props.onAjaxRequest("29114188");
+      props.onAjaxRequest("29114188");  // fake parentItemId
     }
+    this._renderSingleTile = this._renderSingleTile.bind(this);
+    this._renderTiles = this._renderTiles.bind(this);
+  }
+
+  _renderSingleTile(tile, size) {
+    return (
+      <View key={tile.uri} style={styles.photoContainer}>
+        <Image source={tile.uri} style={[styles.photo, size]} />
+      </View>
+    );
+  }
+
+  _renderTiles(items) {
+    console.log("_renderTiles ---> ", items);
+    return items.map( item => {
+      this._renderSingleTile(item, { width: 320, height: 240 });
+    });
   }
 
   render() {
-    const itemImgs = this.props.items;
-    return itemImgs ? (
+    const items = this.props.items;
+    return items ? (
       <Carousel
         indicatorAtBottom={true}
         indicatorOffset={-100}
         delay={3000}
         style={styles.carousel}>
-        <View style={styles.container}>
-          <Text>Electronics</Text>
-        </View>
-        <View style={styles.container}>
-          <Text>Home and Furniture</Text>
-        </View>
-        <View style={styles.container}>
-          <Text>Grocery</Text>
-        </View>
+        {this._renderTiles(items)}
       </Carousel>
     ) : null;
-  }
-
-  _renderPhoto(source, size) {
-    return (
-      <View key={source.uri} style={styles.photoContainer}>
-        <Image source={source} style={[styles.photo, size]} />
-      </View>
-    );
   }
 }
 
@@ -96,9 +90,11 @@ ExCarousel.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    items: state.irsDataMap.irsData
-  }
+  // return {
+  //   items: state.irsDataMap.irsData
+  // }
+  const irsDataAdapter = new IrsDataAdapter(state, {});
+  return irsDataAdapter.adapt();
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -113,7 +109,6 @@ const StatefulExCarousel = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ExCarousel);
-
 
 export default StatefulExCarousel;
 
