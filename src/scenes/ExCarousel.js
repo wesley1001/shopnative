@@ -8,6 +8,7 @@ let {
   View,
 } = React;
 
+import isEmpty from "lodash/isEmpty";
 import { connect } from 'react-redux';
 
 // import does not work, only require works here.
@@ -45,17 +46,24 @@ let styles = StyleSheet.create({
 class ExCarousel extends React.Component {
   constructor(props, context) {
     super(props, context);
-    if (!props.items) {
+
+    if (isEmpty(props.items)) {
       props.onAjaxRequest("29114188");  // fake parentItemId
     }
     this._renderSingleTile = this._renderSingleTile.bind(this);
     this._renderTiles = this._renderTiles.bind(this);
   }
+  
+  componentDidMount() {
+    if (isEmpty(this.props.items)) {
+      this.props.onAjaxRequest("29114188");
+    }
+  }
 
   _renderSingleTile(tile, size) {
     return (
       <View key={tile.uri} style={styles.photoContainer}>
-        <Image source={tile.uri} style={[styles.photo, size]} />
+        <Image source={tile} style={[styles.photo, size]} />
       </View>
     );
   }
@@ -63,13 +71,13 @@ class ExCarousel extends React.Component {
   _renderTiles(items) {
     console.log("_renderTiles ---> ", items);
     return items.map( item => {
-      this._renderSingleTile(item, { width: 320, height: 240 });
+      return this._renderSingleTile(item, { width: 320, height: 240 });
     });
   }
 
   render() {
     const items = this.props.items;
-    return items ? (
+    return items.length > 0 ? ( 
       <Carousel
         indicatorAtBottom={true}
         indicatorOffset={-100}
@@ -100,6 +108,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onAjaxRequest: (parentItemId) => {
+      console.log(" fetching ----> ", parentItemId);
       dispatch(ajaxRequest("Homepage", parentItemId, {}));
     }
   }

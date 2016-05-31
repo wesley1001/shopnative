@@ -78,7 +78,7 @@ class ExHome extends React.Component {
           <Text style={styles.sectionTitle}>Trending Items </Text>
           <ExCarousel />
 
-          <CarouselWrapper />
+          {! <CarouselWrapper /> }
 
           <ListViewDemo />
           <LayoutAnimationDemo />

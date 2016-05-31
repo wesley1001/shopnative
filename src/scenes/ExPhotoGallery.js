@@ -73,6 +73,7 @@ class ExPhotoGallery extends React.Component {
 
   // Image source prop is an object with uri attribute.
   _renderPhoto(source, size) {
+    console.log("Banner ---> ", source);
     return (
       <View key={source.uri} style={styles.photoContainer}>
         <Image source={source} style={[styles.photo, size]} />

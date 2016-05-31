@@ -19,8 +19,16 @@ export default class IrsDataAdapter {
   /**
    */
   adapt() {
-    console.log("irsdata-adapater ---> ", this.module.html);
-    const items = getTileImages(this.module.html);
-    return {"items": items};
+    if (this.module.length > 10) {
+      console.log("irsdata-adapater module ---> ", this.placementId, this.module.substring(0, 20));
+    }
+    const items = getTileImages(this.module);
+    console.log(" adapted items ---> ", items);
+    const tiles = items.map((uri) => {
+      return {
+        uri: `http:${uri}`
+      };
+    });
+    return {"items": tiles};
   }
 }
