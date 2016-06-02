@@ -21,7 +21,7 @@ When testing in ios simulator, the url in exponentjs is `localhost:19004`.
 When sending link to exp.host to your phone.
 The link is defined in .exponent/packager-info.json
 
-	ngrok": "http://jf-78i.colorcloud.shopnative.exp.direct"
+	"ngrok": "http://jf-78i.colorcloud.shopnative.exp.direct"
 	exp://jd-6h5.colorcloud.shop.exp.direct:80
 
 ## Run

@@ -21,8 +21,6 @@ export const queryParams = [
 ];
 
 export const p13nFetch = (opts) => {
-  // return Promise.resolve({});
-
   const parameters = extend(pick(opts, queryParams), {
     "clientGuid": "b151d211-5282-4d34-85de-cfe12266c5ce",
     "visitor_id": opts.visitorId,
@@ -34,7 +32,7 @@ export const p13nFetch = (opts) => {
   const url = "http://www.walmart.com/irs";
   const fetchUrl = `${url}?${queryString.stringify(parameters)}`;
   const fetchOpt = extend(opts, {method: "GET", credentials: "same-origin"});
-  console.warn("fetchUrl ---> ", fetchUrl, fetchOpt);
+  console.log("fetchUrl ---> ", fetchUrl, fetchOpt);
   return fetch(fetchUrl, fetchOpt)
     .then((res) => {
       if (res.status >= 400) {
